@@ -6,7 +6,8 @@ public class EmpWageBuilder {
         System.out.println("************************************");
 
         // Contains
-        final int IS_FULL_TIME = 1;
+        final int IS_PART_TIME = 1;
+        final int IS_FULL_TIME = 2;
         final int EMP_RATE_PER_HR = 20;
 
         // Variables
@@ -14,10 +15,13 @@ public class EmpWageBuilder {
         int empWage = 0;
 
         // Computation
-        double empCheck = Math.floor(Math.random() * 10) % 2;
+        double empCheck = Math.floor(Math.random() * 10) % 3;
         System.out.println(empCheck);
         // Case Checking
-        if (empCheck == IS_FULL_TIME) {
+        if (empCheck == IS_PART_TIME) {
+            System.out.println("Employee is Present.");
+            empHrs = 4;
+        } else if (empCheck == IS_FULL_TIME) {
             System.out.println("Employee is Present.");
             empHrs = 8;
         } else {
