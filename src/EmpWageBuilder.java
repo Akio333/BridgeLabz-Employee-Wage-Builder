@@ -5,12 +5,8 @@ public class EmpWageBuilder {
     public static final int NUM_OF_WORKING_DAYS = 20;
     public static final int MAX_HRS_IN_MONTH = 100;
 
-    public static void main(String[] args) throws Exception {
-
-        // Welcome message
-        System.out.println("Welcome to Employee Wedge Builder...");
-        System.out.println("************************************");
-
+    // Compute Wage method
+    public static int computeEmpWage() {
         // Variables
         int empHrs = 0;
         int empWage = 0;
@@ -37,7 +33,14 @@ public class EmpWageBuilder {
             totalEmpHrs += empHrs;
             System.out.println("Day: " + totalWorkingDays + "\tEmp Hr: " + empHrs);
         }
-        totalEmpWage = totalEmpHrs * EMP_RATE_PER_HR;
-        System.out.println("Total Employee Wage: " + totalEmpWage);
-    }
-}
+        return totalEmpWage = totalEmpHrs * EMP_RATE_PER_HR;
+    } // End computeEmpWage
+
+    public static void main(String[] args) throws Exception {
+
+        // Welcome message
+        System.out.println("Welcome to Employee Wedge Builder...");
+        System.out.println("************************************");
+        System.out.println("Total Employee Wage: " + computeEmpWage());
+    }// end main
+}// end class EmpWageBuilder
