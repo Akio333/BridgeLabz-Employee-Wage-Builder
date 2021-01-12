@@ -1,23 +1,30 @@
-public class EmpWageBuilder {
+public class EmpWageBuilderArray {
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
 
     // Variables
-    private final String company;
-    private final int empRatePerHr;
-    private final int noOfWorkingDays;
-    private final int maxHrsPeronth;
+    private int numOfCompany = 0;
+    private CompanyEmpWage[] companyEmpWageArray;
 
     // Constructer
-    public EmpWageBuilder(String company, int empRatePerHr, int noOfWorkingDays, int maxHrsPeronth) {
-        this.company = company;
-        this.empRatePerHr = empRatePerHr;
-        this.noOfWorkingDays = noOfWorkingDays;
-        this.maxHrsPeronth = maxHrsPeronth;
-    }// End of Constructer
+    public EmpWageBuilderArray() {
+        companyEmpWageArray = new CompanyEmpWage[5];
+    }
+
+    private void addCompanyEmpWage(String company, int empRatePerHr, int noOfWorkingDays, int maxHrsPeronth) {
+        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHr, noOfWorkingDays, maxHrsPeronth);
+        numOfCompany++;
+    }
+
+    private void computeEmpWage() {
+        for (int i = 0; i < numOfCompany; i++) {
+            companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
+            System.out.println(companyEmpWageArray[i]);
+        }
+    }
 
     // Compute Wage method
-    public void computeEmpWage() {
+    public int computeEmpWage(CompanyEmpWage companyEmpWage) {
         // Variables
         int empHrs = 0;
         int totalEmpWage = 0;
@@ -25,7 +32,7 @@ public class EmpWageBuilder {
         int totalEmpHrs = 0;
 
         // Computation
-        while (totalEmpHrs <= maxHrsPeronth && totalWorkingDays < noOfWorkingDays) {
+        while (totalEmpHrs <= companyEmpWage.maxHrsPeronth && totalWorkingDays < companyEmpWage.noOfWorkingDays) {
             totalWorkingDays++;
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
             // Case Checking
@@ -43,9 +50,7 @@ public class EmpWageBuilder {
             totalEmpHrs += empHrs;
             System.out.println("Day: " + totalWorkingDays + "\tEmp Hr: " + empHrs);
         } // End While
-        totalEmpWage = totalEmpHrs * empRatePerHr;
-        System.out.println("Total Employee Wage for company " + company + ": " + totalEmpWage + "\n");
-
+        return totalEmpHrs * companyEmpWage.empRatePerHr;
     } // End computeEmpWage
 
     public static void main(String[] args) throws Exception {
@@ -55,12 +60,12 @@ public class EmpWageBuilder {
         System.out.println("************************************\n");
 
         // Objects
-        EmpWageBuilder dMart = new EmpWageBuilder("Dmart", 20, 2, 10);
-        EmpWageBuilder reliance = new EmpWageBuilder("Reliance", 10, 4, 20);
+        EmpWageBuilderArray empWageBuilder = new EmpWageBuilderArray();
+        empWageBuilder.addCompanyEmpWage("Dmart", 20, 2, 10);
+        empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
 
         // Method calls
-        dMart.computeEmpWage();
-        reliance.computeEmpWage();
+        empWageBuilder.computeEmpWage();
 
     }// End main
 }// End class EmpWageBuilder
