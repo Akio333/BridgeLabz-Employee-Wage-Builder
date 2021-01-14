@@ -21,6 +21,9 @@ public class EmpWageBuilderArray implements EmpWageCalculation {
         for (int i = 0; i < companyEmpWageList.size(); i++) {
             CompanyEmpWage companyEmpWage = companyEmpWageList.get(i);
             companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println("");
+            companyEmpWage.printDailyWage();
+            System.out.println("");
             System.out.println(companyEmpWage);
         }
     }
@@ -31,7 +34,7 @@ public class EmpWageBuilderArray implements EmpWageCalculation {
         int empHrs = 0;
         int totalWorkingDays = 0;
         int totalEmpHrs = 0;
-
+        companyEmpWage.dailyWage = new int[companyEmpWage.noOfWorkingDays];
         // Computation
         System.out.println("Calculating Wage for Company: " + companyEmpWage.company);
         while (totalEmpHrs <= companyEmpWage.maxHrsPeronth && totalWorkingDays < companyEmpWage.noOfWorkingDays) {
@@ -50,6 +53,7 @@ public class EmpWageBuilderArray implements EmpWageCalculation {
                     break;
             }// End Case
             totalEmpHrs += empHrs;
+            companyEmpWage.dailyWage[totalWorkingDays-1] = empHrs * companyEmpWage.empRatePerHr;
             System.out.println("Day: " + totalWorkingDays + "\tEmp Hr: " + empHrs);
         } // End While
         return totalEmpHrs * companyEmpWage.empRatePerHr;
