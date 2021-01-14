@@ -21,6 +21,8 @@ public class EmpWageFinder {
         System.out.println("");
         // Method calls
         empWageBuilder.computeEmpWage();
+        System.out.println("Enter Company Name: ");
+        System.out.println("Employee Wage: "+empWageBuilder.getTotalWage(scanner.next()));
 
     }// End main
 }
